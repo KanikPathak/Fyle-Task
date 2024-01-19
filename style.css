@@ -9,7 +9,7 @@ body {
 .heading {
     text-transform: capitalize;
     text-align: center;
-    padding: 20px;
+    padding: 2%;
     color: white;
 }
 
@@ -24,8 +24,8 @@ body {
 }
 
 .page-btn button {
-    padding: 10px;
-    border-radius: 10px;
+    padding: 1%;
+    border-radius: 2%;
 }
 
 #username {
