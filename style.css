@@ -1,0 +1,153 @@
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-image: url(https://cdn.neowin.com/news/images/uploaded/2021/04/1619644762_github-desktop_story.jpg);
+    background-size: 100%;
+}
+
+.heading {
+    text-transform: capitalize;
+    text-align: center;
+    padding: 20px;
+    color: white;
+}
+
+.page-btn {
+    position: relative;
+    left: 170%;
+}
+
+.page-btn button:hover {
+    background-color: rgb(126, 126, 126);
+    scale: 120%;
+}
+
+.page-btn button {
+    padding: 10px;
+    border-radius: 10px;
+}
+
+#username {
+    text-transform: uppercase;
+    color: white;
+    font-weight: 700;
+    font-size: larger;
+}
+
+.rcontainer {
+    background-color: yellow;
+    width: 80%;
+    position: absolute;
+    left: 10%;
+    padding: 2%;
+}
+
+.card img {
+    height: 200px;
+    width: 200px;
+    border-radius: 50%;
+    border: 1px dashed black;
+    overflow: hidden;
+}
+
+.profile {
+    background-color: rgb(244, 160, 160);
+}
+
+.gridd {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+}
+
+.repo-det {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+.kard {
+    border: 1px solid black;
+    background-color: rgb(190, 185, 185);
+    border-radius: 10px;
+    margin: 2px;
+    height: fit-content;
+    padding: 2%;
+}
+
+.kard a {
+    text-decoration: none;
+    color: blue;
+    font-weight: 700;
+}
+
+.kard .det,
+.kard .language {
+    font-size: small;
+}
+
+/* Loader styles */
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.card {
+    border: 1px solid black;
+    display: inline-block;
+    margin: 10px;
+    padding: 10px;
+}
+
+.pg-btn {
+    margin: 5px;
+    padding: 5px;
+}
+
+/* Loader styles */
+.loader-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    display: none; /* Initially hide the loader */
+}
+
+.loader {
+    border: 8px solid #f3f3f3;
+    border-top: 8px solid #3498db;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* Media queries for responsiveness */
+@media  (max-width: 768px) {
+
+    .gridd {
+        grid-template-columns: 1fr;
+    }
+
+    .repo-det {
+        grid-template-columns: 1fr;
+    }
+    body{
+        width: 100%;
+    }
+}
