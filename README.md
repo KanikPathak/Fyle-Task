@@ -16,8 +16,7 @@ Font Awesome: Used for displaying icons in the user interface.
 
 Bootstrap: Provides styling and layout components for a responsive design.
 
-#
-Commits are Welcome!
+#Commits are Welcomed!
 
 I welcome and appreciate contributions from the community to enhance Repo Explorer. 
 If you have any improvements, bug fixes, or new features you'd like to add, please feel free to contribute! 
