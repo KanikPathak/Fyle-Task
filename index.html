@@ -12,7 +12,6 @@
       crossorigin="anonymous"
     />
     <title>Displaying Github Repository</title>
-
   </head>
 
   <body>
@@ -60,154 +59,138 @@
       <!-- Content will be dynamically added here -->
     </div>
     <div class="bttn"></div>
-  <script>
-    document.addEventListener("DOMContentLoaded", function () {
-    document.getElementById("inputusername2").value = "visionmedia";
-    submitForm();
-  });
-  
-  const token =
-    "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";
-  
-  async function getDetails(username) {
-    const loader = document.getElementById("loader");
-    loader.style.display = "flex"; // Show loader
-  
-    const details = `https://api.github.com/users/${username}`;
-    try {
-      const response = await fetch(details, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      const data = await response.json();
-      const cards = `
-              <div class="gridd" >
-                  <div class="card" style="background-color:#8d8e8" >
-                      <div>
-                          <img src="${data.avatar_url}" class="avatar" />
-                      </div>
-                      <div class="user-info">
-                          <h2>${data.name}</h2>
-                          <p>${data.bio}</p>
-                          <ul class="info">
-                              <li><strong>${data.followers}</strong> Followers</li>
-                              <li><strong>${data.following}</strong> Following</li>
-                              <li><strong>${data.public_repos}</strong> Repos</li>
-                          </ul>
-                      </div>
-                  </div>
-                  <div class="repo-det">
-                  </div>
-                  <div class="page-btn">
-                  </div>
-              </div>
-          `;
-      document.getElementById("main").innerHTML = cards;
-    } catch (error) {
-      console.log("Error while fetching user details");
-    } finally {
-      loader.style.display = "none"; // Hide loader after fetching data
-    }
-  
-    getRepo();
-  }
-  
-  function submitForm() {
-    const usernameInput = document.getElementById("inputusername2").value;
-    if (usernameInput) {
-      getDetails(usernameInput);
-    }
-  }
-  
-  async function getRepo() {
-    const loader = document.getElementById("loader");
-    loader.style.display = "flex"; // Show loader
-  
-    const repoDiv = document.querySelector(".repo-det");
-    const paginationButton = document.querySelector(".page-btn");
-    let currentPage = 1;
-    const username = document.getElementById("inputusername2").value;
-    const details = `https://api.github.com/users/${username}/repos`;
-    try {
-      const response = await fetch(details, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      const data = await response.json();
-      const totalCards = data.length;
-      const cardsAtOne = 6;
-      const pages = Math.ceil(totalCards / cardsAtOne);
-  
-      // Create Cards displaying information:
-      for (let index = 0; index < totalCards; index++) {
-        const kard = document.createElement("div");
-        kard.classList.add("kard");
-        kard.innerHTML = `
-                  <div>
-                      <div class="repoName">
-                          <a href="${
-                            data[index].html_url
-                          }" target="_blank">
-                              ${data[index].name}
-                          </a>
-                      </div>
-                      <div class="det">
-                          ${
-                            data[index].description ||
-                            "No description available"
-                          }
-                      </div>
-                      <br>
-                      <div class="language">
-                          <i class="fa fa-circle" style="color:red"></i>
-                          ${
-                            data[index].language ||
-                            "Language not specified"
-                          }
-                      </div>
-                  </div>
-              `;
-        repoDiv.appendChild(kard);
-      }
-  
-      // create pagination buttons
-      const btns = document.querySelector(".page-btn");
-      for (let index = 1; index <= pages; index++) {
-        const btn = document.createElement("button");
-        btn.classList.add("pg-btn", "btn", "btn-secondary");
-        btn.textContent = index;
-        btn.addEventListener("click", () => {
-          currentPage = index;
-          showPage(currentPage);
-        });
-        btns.appendChild(btn);
-      }
-  
-      // create pagination:
-      function showPage(currentPage) {
-        const elements = document.querySelectorAll(".kard");
-        const startIndex = (currentPage - 1) * cardsAtOne;
-        const endIndex = currentPage * cardsAtOne;
-        elements.forEach((element, index) => {
-          if (index >= startIndex && index < endIndex) {
-            element.style.display = "inline-block";
-          } else {
-            element.style.display = "none";
-          }
-        });
-      }
-  
-      // Initially show the first page
-      showPage(currentPage);
-    } catch (error) {
-      console.log("Error while fetching repository");
-    } finally {
-      loader.style.display = "none"; // Hide loader after fetching data
-    }
-  }
 
-  </script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        document.getElementById("inputusername2").value = "visionmedia";
+        submitForm();
+      });
+      
+      // const token =
+      //   "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";
+      
+      async function getDetails(username) {
+        const loader = document.getElementById("loader");
+        loader.style.display = "flex"; // Show loader
+      
+        const details = `https://api.github.com/users/${username}`;
+        try {
+          const response = await fetch(details);
+          const data = await response.json();
+          const cards = `
+            <div class="gridd">
+              <div class="card" style="background-color:#8d8e8">
+                <div>
+                  <img src="${data.avatar_url}" class="avatar" />
+                </div>
+                <div class="user-info">
+                  <h2>${data.name}</h2>
+                  <p>${data.bio}</p>
+                  <ul class="info">
+                    <li><strong>${data.followers}</strong> Followers</li>
+                    <li><strong>${data.following}</strong> Following</li>
+                    <li><strong>${data.public_repos}</strong> Repos</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="repo-det">
+              </div>
+              <div class="page-btn">
+              </div>
+            </div>
+          `;
+          document.getElementById("main").innerHTML = cards;
+        } catch (error) {
+          console.log("Error while fetching user details", error);
+        } finally {
+          loader.style.display = "none"; // Hide loader after fetching data
+        }
+      
+        getRepo();
+      }
+      
+      function submitForm() {
+        const usernameInput = document.getElementById("inputusername2").value;
+        if (usernameInput) {
+          getDetails(usernameInput);
+        }
+      }
+      
+      async function getRepo() {
+        const loader = document.getElementById("loader");
+        loader.style.display = "flex"; // Show loader
+      
+        const repoDiv = document.querySelector(".repo-det");
+        const paginationButton = document.querySelector(".page-btn");
+        let currentPage = 1;
+        const username = document.getElementById("inputusername2").value;
+        const details = `https://api.github.com/users/${username}/repos`;
+        try {
+          const response = await fetch(details);
+          const data = await response.json();
+          const totalCards = data.length;
+          const cardsAtOne = 6;
+          const pages = Math.ceil(totalCards / cardsAtOne);
+      
+          // Create Cards displaying information:
+          for (let index = 0; index < totalCards; index++) {
+            const kard = document.createElement("div");
+            kard.classList.add("kard");
+            kard.innerHTML = `
+              <div>
+                <div class="repoName">
+                  <a href="${data[index].html_url}" target="_blank">
+                    ${data[index].name}
+                  </a>
+                </div>
+                <div class="det">
+                  ${data[index].description || "No description available"}
+                </div>
+                <br>
+                <div class="language">
+                  <i class="fa fa-circle" style="color:red"></i>
+                  ${data[index].language || "Language not specified"}
+                </div>
+              </div>
+            `;
+            repoDiv.appendChild(kard);
+          }
+      
+          // create pagination buttons
+          const btns = document.querySelector(".page-btn");
+          for (let index = 1; index <= pages; index++) {
+            const btn = document.createElement("button");
+            btn.classList.add("pg-btn", "btn", "btn-secondary");
+            btn.textContent = index;
+            btn.addEventListener("click", () => {
+              currentPage = index;
+              showPage(currentPage);
+            });
+            btns.appendChild(btn);
+          }
+      
+          // create pagination:
+          function showPage(currentPage) {
+            const elements = document.querySelectorAll(".kard");
+            const startIndex = (currentPage - 1) * cardsAtOne;
+            const endIndex = currentPage * cardsAtOne;
+            elements.forEach((element, index) => {
+              if (index >= startIndex && index < endIndex) {
+                element.style.display = "inline-block";
+              } else {
+                element.style.display = "none";
+              }
+            });
+          }
+      
+          // Initially show the first page
+          showPage(currentPage);
+        } catch (error) {
+          console.log("Error while fetching repository", error);
+        } finally {
+          loader.style.display = "none"; // Hide loader after fetching data
+        }
+      }
+    </script>
   </body>
 </html>
